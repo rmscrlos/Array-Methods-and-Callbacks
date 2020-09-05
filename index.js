@@ -60,7 +60,8 @@ import { fifaData } from './fifa.js';
         return years;
     }
 
-    console.log(getYears(getFinals(fifaData)));
+    getYears(getFinals(fifaData));
+    // console.log(getYears(getFinals(fifaData)));
 
 /* Task 4: Implement a higher-order function called `getWinners`, that accepts the callback function `getFinals()` and determine the winner (home or away) of each `finals` game. Return the name of all winning countries in an array called `winners` */ 
 
@@ -81,7 +82,9 @@ import { fifaData } from './fifa.js';
 
     };
 
-    console.log(getWinners(getFinals(fifaData)));
+    getWinners(getFinals(fifaData));
+
+    // console.log(getWinners(getFinals(fifaData)));
 
 /* Task 5: Implement a higher-order function called `getWinnersByYear` that accepts the following parameters and returns a set of strings "In {year}, {country} won the world cup!" 
 
@@ -90,21 +93,39 @@ Parameters:
  * callback function getYears
  */
 
-function getWinnersByYear(/* code here */) {
 
-};
+function getWinnersByYear(cb, cb2) {
+   
+    let countries = [];
+    let years = [];
 
-getWinnersByYear();
+   
+        cb(getFinals(fifaData)).forEach(element =>  countries.push(element))
+
+        cb2(getFinals(fifaData)).forEach(element => years.push(element))
+        
+        for(let i = 0; i < countries.length; i++){
+            console.log(`In ${years[i]}, ${countries[i]} won the world cup!`)
+        }
+    
+
+}
+
+// getWinnersByYear(getWinners, getYears);
 
 /* Task 6: Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
 
-function getAverageGoals(/* code here */) {
+function getAverageGoals(data) {
 
-    /* code here */
+    const avgGoalsHome = data.reduce((total, item) => total += item['Home Team Goals'] / data.length, 0);
+
+    const avgGoalsAway = data.reduce((total, item) => total += item['Away Team Goals'] / data.length, 0);
+    
+    console.log(`This is the avg. goals of Home Teams: ${avgGoalsHome} \n\nThis is the avg. goals of Away Teams: ${avgGoalsAway}`)
 
 };
 
-getAverageGoals();
+getAverageGoals(fifaData);
 
 /// STRETCH 🥅 //
 

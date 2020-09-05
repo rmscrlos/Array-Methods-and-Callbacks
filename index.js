@@ -50,7 +50,7 @@ import { fifaData } from './fifa.js';
 
     // getFinals(fifaData);
 
-    // console.log(getFinals(fifaData));
+    console.log(getFinals(fifaData));
 
 /* Task 3: Implement a higher-order function called `getYears` that accepts the callback function `getFinals`, and returns an array called `years` containing all of the years in the dataset */
 
@@ -66,17 +66,16 @@ import { fifaData } from './fifa.js';
 /* Task 4: Implement a higher-order function called `getWinners`, that accepts the callback function `getFinals()` and determine the winner (home or away) of each `finals` game. Return the name of all winning countries in an array called `winners` */ 
 
     function getWinners(callback) {
-        let home = callback[0]["Home Team Goals"];
-        let away = callback[0]["Away Team Goals"];
         let winners = [];
 
-        for(let x in callback){
-            if (home > away){
-                winners.push(callback[x]["Home Team Name"]);
+        callback.forEach((element) => {
+            if (element["Home Team Goals"] > element["Away Team Goals"]){
+                winners.push(element["Home Team Name"]);
             } else {
-                winners.push(callback[x]["Away Team Name"]);
+                winners.push(element["Away Team Name"]);
             }
-        }
+        })
+        
 
         return winners;
 
@@ -84,7 +83,7 @@ import { fifaData } from './fifa.js';
 
     getWinners(getFinals(fifaData));
 
-    // console.log(getWinners(getFinals(fifaData)));
+    console.log(getWinners(getFinals(fifaData)));
 
 /* Task 5: Implement a higher-order function called `getWinnersByYear` that accepts the following parameters and returns a set of strings "In {year}, {country} won the world cup!" 
 
@@ -125,7 +124,7 @@ function getAverageGoals(data) {
 
 };
 
-getAverageGoals(fifaData);
+// getAverageGoals(fifaData);
 
 /// STRETCH 🥅 //
 
@@ -145,13 +144,21 @@ getCountryWins();
 
 /* Stretch 3: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
 
-function getGoals(/* code here */) {
-
-    /* code here */
+function getGoals(data) {
+    let mostGoals = [];
+    let finals = data.filter(e => e.Stage === 'Final');
+    finals.forEach((element) => {
+        if(element["Home Team Goals"] > element["Away Team Goals"]) {
+            mostGoals.push(element["Home Team Name"]);
+        } else {
+            mostGoals.push(element["Away Team Name"]);
+        }
+    })
+    console.log(finals, mostGoals);
 
 };
 
-getGoals();
+// getGoals(fifaData);
 
 
 /* Stretch 4: Write a function called badDefense() that accepts a parameter `data` and calculates the team with the most goals scored against them per appearance (average goals against) in the World Cup finals */

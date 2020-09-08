@@ -50,7 +50,7 @@ import { fifaData } from './fifa.js';
 
     // getFinals(fifaData);
 
-    console.log(getFinals(fifaData));
+    // console.log(getFinals(fifaData));
 
 /* Task 3: Implement a higher-order function called `getYears` that accepts the callback function `getFinals`, and returns an array called `years` containing all of the years in the dataset */
 
@@ -89,7 +89,7 @@ import { fifaData } from './fifa.js';
 
     // getWinners(getFinals(fifaData));
 
-    console.log(getWinners(getFinals(fifaData)));
+    // console.log(getWinners(getFinals(fifaData)));
 
 /* Task 5: Implement a higher-order function called `getWinnersByYear` that accepts the following parameters and returns a set of strings "In {year}, {country} won the world cup!" 
 
@@ -150,21 +150,29 @@ function getCountryWins(/* code here */) {
 
 /* Stretch 3: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
 
-function getGoals(data) {
-    let mostGoals = [];
-    let finals = data.filter(e => e.Stage === 'Final');
-    finals.forEach((element) => {
-        if(element["Home Team Goals"] > element["Away Team Goals"]) {
-            mostGoals.push(`${element["Home Team Name"]} scored:  ${element["Home Team Goals"]}`);
-        } else {
-            mostGoals.push(`${element["Away Team Name"]} scored:  ${element["Away Team Goals"]}`);
-        }
-    })
-    console.log(finals, mostGoals);
+    // function getGoals(data) {
+    //     let winners = [];
+    //     let finals = data.filter(e => e.Stage === 'Final');
+    //     let mostGoals = [];
+    //     finals.forEach((element) => {
+    //         if (element["Home Team Goals"] === 0 && element["Away Team Goals"] === 0) {
+    //             if(winners.includes(element["Home Team Name"])){
+    //                 winners.push(element["Home Team Name"]);
+    //             } else {
+    //                 winners.push(element["Away Team Name"]);
+    //             }
+    //         } else if (element["Home Team Goals"] > element["Away Team Goals"]){
+    //             winners.push(element["Home Team Name"])
+    //         } else {
+    //             winners.push(element["Away Team Name"]);
+    //         }
+    //     })
 
-};
+    //     console.log(winners);
 
-// getGoals(fifaData);
+    // };
+
+    // getGoals(fifaData);
 
 
 /* Stretch 4: Write a function called badDefense() that accepts a parameter `data` and calculates the team with the most goals scored against them per appearance (average goals against) in the World Cup finals */

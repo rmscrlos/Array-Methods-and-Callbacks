@@ -60,7 +60,7 @@ import { fifaData } from './fifa.js';
         return years;
     }
 
-    getYears(getFinals(fifaData));
+    // getYears(getFinals(fifaData));
     // console.log(getYears(getFinals(fifaData)));
 
 /* Task 4: Implement a higher-order function called `getWinners`, that accepts the callback function `getFinals()` and determine the winner (home or away) of each `finals` game. Return the name of all winning countries in an array called `winners` */ 
@@ -69,19 +69,25 @@ import { fifaData } from './fifa.js';
         let winners = [];
 
         callback.forEach((element) => {
-            if (element["Home Team Goals"] > element["Away Team Goals"]){
-                winners.push(element["Home Team Name"]);
+            if (element["Home Team Goals"] === 0 && element["Away Team Goals"] === 0) {
+                if(winners.includes(element["Home Team Name"])){
+                    winners.push(element["Home Team Name"]);
+                } else {
+                    winners.push(element["Away Team Name"]);
+                }
+            } else if (element["Home Team Goals"] > element["Away Team Goals"]){
+                winners.push(element["Home Team Name"])
             } else {
                 winners.push(element["Away Team Name"]);
             }
-        })
+        });
         
 
         return winners;
 
     };
 
-    getWinners(getFinals(fifaData));
+    // getWinners(getFinals(fifaData));
 
     console.log(getWinners(getFinals(fifaData)));
 
@@ -139,7 +145,7 @@ function getCountryWins(/* code here */) {
 
 };
 
-getCountryWins();
+// getCountryWins();
 
 
 /* Stretch 3: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
@@ -149,9 +155,9 @@ function getGoals(data) {
     let finals = data.filter(e => e.Stage === 'Final');
     finals.forEach((element) => {
         if(element["Home Team Goals"] > element["Away Team Goals"]) {
-            mostGoals.push(element["Home Team Name"]);
+            mostGoals.push(`${element["Home Team Name"]} scored:  ${element["Home Team Goals"]}`);
         } else {
-            mostGoals.push(element["Away Team Name"]);
+            mostGoals.push(`${element["Away Team Name"]} scored:  ${element["Away Team Goals"]}`);
         }
     })
     console.log(finals, mostGoals);
